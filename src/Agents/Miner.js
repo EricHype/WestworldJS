@@ -1,8 +1,15 @@
 import { BaseGameEntity } from "../BaseGameEntity.js";
-import { Location } from "../Location.enum.js"
+import { Location } from "../Location.enum.js";
 
 export class Miner extends BaseGameEntity {
-  constructor(id, comfortLevel, maxNuggets, thirstLevel, tirednessThreshold, startingState) {
+  constructor(
+    id,
+    comfortLevel,
+    maxNuggets,
+    thirstLevel,
+    tirednessThreshold,
+    startingState
+  ) {
     super(id);
     this.id = id;
     this.comfortLevel = comfortLevel;
@@ -12,8 +19,8 @@ export class Miner extends BaseGameEntity {
 
     this.currentState = startingState;
     this.location = Location.Shack;
-    this.goldCarried = 0;
-    this.moneyInBank = 0;
+    this.goldCarried = 5;
+    this.moneyInBank = 5;
 
     // the higher the value, the thirstier the miner
     this.thirst = 0;
@@ -24,8 +31,8 @@ export class Miner extends BaseGameEntity {
 
   update() {
     this.thirst += 1;
-    if(this.currentState != null) {
-        this.currentState.execute(this);
+    if (this.currentState != null) {
+      this.currentState.execute(this);
     }
   }
 
@@ -35,11 +42,32 @@ export class Miner extends BaseGameEntity {
     this.currentState.enter(this);
   }
 
+  changeLocation(location) {
+    this.location = location;
+  }
+
   getThirst() {
     return this.thirst;
   }
 
   setThirst(thirst) {
+    console.log(`Thirst level: ${thirst}`);
     this.thirst = thirst;
+  }
+
+  getGold() {
+    return this.goldCarried;
+  }
+
+  setGold(amount) {
+    this.goldCarried = amount;
+  }
+
+  setBankMoney(amount) {
+    this.moneyInBank = amount;
+  }
+
+  getBankMoney() {
+    return this.moneyInBank;
   }
 }

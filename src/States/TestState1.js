@@ -1,5 +1,5 @@
-import { State } from "./State.js"
-import { TestState2 } from "./TestState2.js";
+import { State } from "./State.js";
+import { EnterSaloon } from "./EnterSaloon.js";
 
 export class TestState1 extends State {
   enter(object) {
@@ -13,8 +13,8 @@ export class TestState1 extends State {
   execute(object) {
     console.log("Executing test 1 state");
 
-    if(object.getThirst() > 5) {
-        object.changeState(new TestState2());
+    if (object.getThirst() > 5) {
+      object.changeState(new EnterSaloon());
     }
   }
 }
