@@ -1,7 +1,7 @@
 import { State } from "./State.js"
-import { TestState2 } from "./TestState2.js";
+import { BarState } from "./BarState.js";
 
-export class TestState1 extends State {
+export class StartingState extends State {
   enter(object) {
     console.log("Entering test 1 state");
   }
@@ -13,8 +13,8 @@ export class TestState1 extends State {
   execute(object) {
     console.log("Executing test 1 state");
 
-    if(object.getThirst() > 5) {
-        object.changeState(new TestState2());
+    if(object.isOverThirstThreshold()) {
+        object.changeState(new BarState());
     }
   }
 }
